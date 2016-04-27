@@ -10,13 +10,21 @@ public class PlayerScript : MonoBehaviour {
 	private SpawnerScript spawnerScript;
 	public GUIText youLoseText;
 	public bool powerThreeShot = false;
-	public float timeRemaining = -1.0f;
-	public float threeShotCooldown = 5f;
+
+	private float threeShotStartTime = 0f;
+	private float threeShotDuration = 5f;
+
+	private float shotCD = .25f;
+	private float shotCDStartTime;
+	private bool canIShoot = true;
+
 	public float playerHealth = 5.0f;
 
 	Vector3 mousePosition;
 	Vector3 direction;
 	public Quaternion rotation;
+
+	private float spreadAngle = 5f;
 
 	private GameObject PlayAgain;
 
@@ -40,41 +48,52 @@ public class PlayerScript : MonoBehaviour {
 	void Update ()
 	{
 
-
-
-		if (timeRemaining <= Time.deltaTime) {
-			powerThreeShot = false;
+		if (powerThreeShot) {
+			if(Time.time>=threeShotDuration+threeShotStartTime)	{
+				powerThreeShot = false;
+				ChangeColor ();
+			}
+		}
+		if (canIShoot == false) {
+			if (Time.time >= shotCD + shotCDStartTime) {
+				canIShoot = true;
+			}
 		}
 
-
 		Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-		if (Input.GetButtonDown("Fire1") ) {
+		if (Input.GetMouseButton(0) ) {
 
-			if (powerThreeShot == false){
-				GameObject bul = (GameObject)Instantiate (PlayerBullet);
-				bul.transform.position = transform.position;
-
-				mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-				mousePosition.z = 0.0f;
-				direction = (mousePosition - transform.position).normalized;
-				bul.GetComponent<PlayerBulletScript> ().buldirection = direction;
-			}
-
-			if (powerThreeShot == true){
-
-				mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-				mousePosition.z = 0.0f;
-				direction = (mousePosition - transform.position).normalized;
-				direction = Quaternion.Euler(0, 0, -15) * direction;
-
-				for (int i = 0; i < 3; i++){
+			if(canIShoot)
+			{
+				if (powerThreeShot == false){
 					GameObject bul = (GameObject)Instantiate (PlayerBullet);
 					bul.transform.position = transform.position;
-					Vector3 intendedDirection;
-					intendedDirection = Quaternion.Euler(0,0,direction.z + (i*15)) * direction;
-					bul.GetComponent<PlayerBulletScript> ().buldirection = intendedDirection;
+
+					mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+					mousePosition.z = 0.0f;
+					direction = (mousePosition - transform.position).normalized;
+					bul.GetComponent<PlayerBulletScript> ().buldirection = direction;
+					canIShoot = false;
+					shotCDStartTime = Time.time;
 				}
 
+				if (powerThreeShot == true){
+
+					mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+					mousePosition.z = 0.0f;
+					direction = (mousePosition - transform.position).normalized;
+					direction = Quaternion.Euler(0, 0, -spreadAngle) * direction;
+
+					for (int i = 0; i < 3; i++){
+						GameObject bul = (GameObject)Instantiate (PlayerBullet);
+						bul.transform.position = transform.position;
+						Vector3 intendedDirection;
+						intendedDirection = Quaternion.Euler(0,0,direction.z + (i*spreadAngle)) * direction;
+						bul.GetComponent<PlayerBulletScript> ().buldirection = intendedDirection;
+					}
+					canIShoot = false;
+					shotCDStartTime = Time.time;
+				}
 			}
 
 		}
@@ -142,20 +161,26 @@ public class PlayerScript : MonoBehaviour {
 		}
 	}
 	public void ChangeColor(){
-		if (playerHealth == 5) {
-			this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0f, 1f, 0f, 1);
+
+		if(powerThreeShot){
+			this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1f, 0f, 1f, 1);
 		}
-		if (playerHealth == 4) {
-			this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.21f, 0.9f, 0.21f, 1);
-		}
-		if (playerHealth == 3) {
-			this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.45f, 0.86f, 0.45f, 1);
-		}
-		if (playerHealth == 2) {
-			this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.67f, 0.9f, 0.67f, 1);
-		}
-		if (playerHealth == 1) {
-			this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
+		else{
+			if (playerHealth == 5) {
+				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0f, 1f, 0f, 1);
+			}
+			if (playerHealth == 4) {
+				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.21f, 0.9f, 0.21f, 1);
+			}
+			if (playerHealth == 3) {
+				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.45f, 0.86f, 0.45f, 1);
+			}
+			if (playerHealth == 2) {
+				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.67f, 0.9f, 0.67f, 1);
+			}
+			if (playerHealth == 1) {
+				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
+			}
 		}
 	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  what happens when hit
@@ -175,6 +200,15 @@ public class PlayerScript : MonoBehaviour {
 	{
 		//loadingImage.SetActive(true);
 		Application.LoadLevel(level);
+	}
+
+	public void threeShotActivate (){
+		//threeShotDuration = 5f;
+		threeShotStartTime = Time.time;
+		powerThreeShot = true;
+		//threeShotStartTime
+		ChangeColor ();
+
 	}
 
 	void GameOverCommence()

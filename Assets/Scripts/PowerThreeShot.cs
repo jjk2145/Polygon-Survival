@@ -8,7 +8,7 @@ public class PowerThreeShot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		playerScript = player.GetComponent < PlayerScript > ();
-
+		
 	}
 	
 	// Update is called once per frame
@@ -24,7 +24,7 @@ public class PowerThreeShot : MonoBehaviour {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  what happens when hit
 	void onHit (){
-		playerScript.powerThreeShot = true;
+		playerScript.threeShotActivate ();
 		print ("3 shot");
 		Destroy (gameObject);
 	}
