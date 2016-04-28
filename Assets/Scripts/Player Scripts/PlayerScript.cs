@@ -9,7 +9,7 @@ public class PlayerScript : MonoBehaviour {
 	private HealthKeeper healthKeeper;
 	private SpawnerScript spawnerScript;
 	public GUIText youLoseText;
-	public bool powerThreeShot = false;
+	public bool powerThreeShot = true;
 
 	private float threeShotStartTime = -1000f;
 	private float threeShotDuration = 5f;
@@ -51,6 +51,7 @@ public class PlayerScript : MonoBehaviour {
 		if (powerThreeShot) {
 			if(Time.time>=threeShotDuration+threeShotStartTime)	{
 				powerThreeShot = false;
+				ChangeColor();
 
 			}
 		}
@@ -179,9 +180,9 @@ public class PlayerScript : MonoBehaviour {
 			if (playerHealth == 1) {
 				gameObject.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
 			}
-			/*if(powerThreeShot){
+			if(powerThreeShot){
 				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1f, 0f, 1f, 1);
-			}*/
+			}
 	}
 
 	//////  what happens when hit
