@@ -9,14 +9,16 @@ public class PowerUpHealth : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		player = GameObject.FindGameObjectWithTag("Player");
 		playerScript = player.GetComponent < PlayerScript > ();
 		GameObject playerHealthObject = GameObject.FindWithTag ("HealthKeeper");
 		if (playerHealthObject != null) {
 			healthKeeper = playerHealthObject.GetComponent <HealthKeeper> ();
 		}
-		if (healthKeeper == null) {
+		else {
 			Debug.Log ("Can't find 'HealthKeeper' script");
 		}
+		print ("Yay I'm alive hp boost");
 	}
 	
 	// Update is called once per frame

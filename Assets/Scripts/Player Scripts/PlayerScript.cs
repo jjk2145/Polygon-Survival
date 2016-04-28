@@ -11,7 +11,7 @@ public class PlayerScript : MonoBehaviour {
 	public GUIText youLoseText;
 	public bool powerThreeShot = false;
 
-	private float threeShotStartTime = 0f;
+	private float threeShotStartTime = -1000f;
 	private float threeShotDuration = 5f;
 
 	private float shotCD = .25f;
@@ -26,7 +26,7 @@ public class PlayerScript : MonoBehaviour {
 
 	private float spreadAngle = 5f;
 
-	private GameObject PlayAgain;
+	public GameObject PlayAgain;
 
 	public float speed = 10.0f;
 
@@ -47,11 +47,11 @@ public class PlayerScript : MonoBehaviour {
 
 	void Update ()
 	{
-
+		//print (powerThreeShot);
 		if (powerThreeShot) {
 			if(Time.time>=threeShotDuration+threeShotStartTime)	{
 				powerThreeShot = false;
-				ChangeColor ();
+
 			}
 		}
 		if (canIShoot == false) {
@@ -162,28 +162,29 @@ public class PlayerScript : MonoBehaviour {
 	}
 	public void ChangeColor(){
 
-		if(powerThreeShot){
-			this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1f, 0f, 1f, 1);
-		}
-		else{
+		print ("Changing color");
+
 			if (playerHealth == 5) {
-				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0f, 1f, 0f, 1);
+				gameObject.GetComponent<SpriteRenderer> ().color = new Color (0f, 1f, 0f, 1);
 			}
 			if (playerHealth == 4) {
-				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.21f, 0.9f, 0.21f, 1);
+				gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.21f, 0.9f, 0.21f, 1);
 			}
 			if (playerHealth == 3) {
-				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.45f, 0.86f, 0.45f, 1);
+				gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.45f, 0.86f, 0.45f, 1);
 			}
 			if (playerHealth == 2) {
-				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.67f, 0.9f, 0.67f, 1);
+				gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.67f, 0.9f, 0.67f, 1);
 			}
 			if (playerHealth == 1) {
-				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
+				gameObject.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
 			}
-		}
+			/*if(powerThreeShot){
+				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1f, 0f, 1f, 1);
+			}*/
 	}
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  what happens when hit
+
+	//////  what happens when hit
 	void onHit (){
 		playerHealth--;
 		healthKeeper.SubtractOneHealth ();
@@ -192,7 +193,6 @@ public class PlayerScript : MonoBehaviour {
 
 	void PlayAgainButton()
 	{
-		PlayAgain = GameObject.Find ("GameManager").GetComponent<GameManagers> ().PlayAgain;
 		PlayAgain.GetComponent<Button> ().onClick.AddListener (GameOverCommence);
 	}
 

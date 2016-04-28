@@ -28,6 +28,9 @@ public class TriangleScript : MonoBehaviour {
 	public int scoreValue;
 	private ScoreKeeper scoreKeeper;
 
+	public GameObject gameManager;
+	public DropPowerup dropPowerupScript;
+
 
 	// Use this for initialization
 	void Start () {
@@ -90,6 +93,7 @@ public class TriangleScript : MonoBehaviour {
 			Debug.Log ("Can't find 'ScoreKeeper' script");
 		}
 
+		dropPowerupScript = gameManager.GetComponent <DropPowerup> ();
 	}
 	
 	// Update is called once per frame
@@ -160,14 +164,14 @@ public class TriangleScript : MonoBehaviour {
 				if (i == 0) {
 					//bullet.transform.LookAt(corner1.transform);
 					bulDirection = (corner1.transform.position - transform.position).normalized;
-					print (bulDirection);
+					//print (bulDirection);
 					Clone.GetComponent<EnemyBulletScript> ().targetPos = bulDirection;
 				}
 				else if (i == 1) {
 					//bullet.transform.LookAt(corner2.transform);
 					//bullet.GetComponent<EnemyBulletScript>().targetPos = corner2.transform.position;
 					bulDirection = (corner2.transform.position - transform.position).normalized;
-					print (bulDirection);
+					//print (bulDirection);
 					Clone.GetComponent<EnemyBulletScript> ().targetPos = bulDirection;
 				}
 				else if(i==2){
@@ -177,7 +181,7 @@ public class TriangleScript : MonoBehaviour {
 					//bullet.GetComponent<EnemyBulletScript> ().speed = -bullet.GetComponent<EnemyBulletScript> ().speed;
 
 					bulDirection = (corner3.transform.position - transform.position).normalized;
-					print (bulDirection);
+					//print (bulDirection);
 					Clone.GetComponent<EnemyBulletScript> ().targetPos = bulDirection;
 				}
 			}
@@ -191,6 +195,8 @@ public class TriangleScript : MonoBehaviour {
 
 		//DESTROY CHECKS
 		if (enemyHealth <= 0) { 
+			dropPowerupScript.location = transform.position;
+			dropPowerupScript.RNG ();
 			Destroy (gameObject);
 		}
 

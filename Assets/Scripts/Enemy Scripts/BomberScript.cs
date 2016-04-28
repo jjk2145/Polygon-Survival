@@ -16,6 +16,9 @@ public class BomberScript : MonoBehaviour {
 	private ScoreKeeper scoreKeeper;
 	float enemyHealth = 3;
 
+	public GameObject gameManager;
+	public DropPowerup dropPowerupScript;
+
 
 	// Use this for initialization
 	void Start () {
@@ -26,9 +29,12 @@ public class BomberScript : MonoBehaviour {
 		if (scoreKeeperObject != null) {
 			scoreKeeper = scoreKeeperObject.GetComponent <ScoreKeeper> ();
 		}
-		if (scoreKeeper == null) {
+		else{
 			Debug.Log ("Can't find 'ScoreKeeper' script");
 		}
+
+		dropPowerupScript = gameManager.GetComponent <DropPowerup> ();
+
 	}
 	
 	// Update is called once per frame
@@ -77,6 +83,8 @@ public class BomberScript : MonoBehaviour {
 
 		//delete here
 		if (enemyHealth <= 0) { 
+			dropPowerupScript.location = transform.position;
+			dropPowerupScript.RNG ();
 			Destroy (gameObject);
 		}
 

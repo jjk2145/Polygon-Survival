@@ -45,7 +45,7 @@ public class SpawnerScript : MonoBehaviour {
 			spawnCooldown = .50f;
 		}
 		if (score >= 4000) {
-			spawnCooldown = .25f;
+			spawnCooldown = .35f;
 		}
 
 
