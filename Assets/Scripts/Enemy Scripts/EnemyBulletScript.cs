@@ -19,7 +19,7 @@ public class EnemyBulletScript : MonoBehaviour {
 			(targetPos - transform.position, transform.TransformDirection(Vector3.up));
 		transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);*/
 
-		print ("bullet target " + targetPos);
+		//print ("bullet target " + targetPos);
 
 		GameObject scoreKeeperObject = GameObject.FindWithTag ("ScoreKeeper");
 		if (scoreKeeperObject != null) {

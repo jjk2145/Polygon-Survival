@@ -26,7 +26,7 @@ public class DropPowerup : MonoBehaviour {
 
 	void checkForSpawn()
 	{
-		print ("Checking to see if you got a powerup drop.....");
+		//print ("Checking to see if you got a powerup drop.....");
 		if (dropCheck != 0 && dropCheck > 100-percentChanceForPowerup) {
 			spawnPowerup ();
 
@@ -35,7 +35,7 @@ public class DropPowerup : MonoBehaviour {
 	}
 	public void RNG()
 	{
-		print ("running the RNG.....");
+		//print ("running the RNG.....");
 		dropCheck = Random.Range (0,101);
 		print ("You got a " + dropCheck);
 		checkForSpawn ();
@@ -43,7 +43,7 @@ public class DropPowerup : MonoBehaviour {
 
 	void spawnPowerup ()
 	{
-		print ("Spawning powerup! ");
+		//print ("Spawning powerup! ");
 		powerupNumber = Random.Range (0,2);
 		print ("You got a " + powerupNumber);
 

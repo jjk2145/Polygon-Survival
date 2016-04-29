@@ -15,6 +15,8 @@ public class SpawnerScript : MonoBehaviour {
 	public GameObject bomber;
 	public GameObject ScoreKeeper;
 
+	float HPmultiplyer = 1;
+
 	//score from scorekeeper
 	int score;
 	// Use this for initialization
@@ -41,11 +43,12 @@ public class SpawnerScript : MonoBehaviour {
 		if (score >= 2000 && score<2999) {
 			spawnCooldown = .75f;
 		}
-		if (score >= 3000 && score<3999) {
+		/*if (score >= 3000 && score<3999) {
 			spawnCooldown = .50f;
-		}
+		}*/
 		if (score >= 4000) {
-			spawnCooldown = .35f;
+			//spawnCooldown = .35f;
+			HPmultiplyer = 2f;
 		}
 
 
@@ -62,6 +65,7 @@ public class SpawnerScript : MonoBehaviour {
 				Instantiate(triangle,
 					new Vector3(Random.Range(-8,8),9,0),
 					Quaternion.identity);
+				triangle.GetComponent<TriangleScript> ().hpMultiplyer = HPmultiplyer;
 				
 			}
 

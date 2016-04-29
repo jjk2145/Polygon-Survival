@@ -30,7 +30,7 @@ public class BomberScript : MonoBehaviour {
 			scoreKeeper = scoreKeeperObject.GetComponent <ScoreKeeper> ();
 		}
 		else{
-			Debug.Log ("Can't find 'ScoreKeeper' script");
+			//Debug.Log ("Can't find 'ScoreKeeper' script");
 		}
 
 		dropPowerupScript = gameManager.GetComponent <DropPowerup> ();
@@ -46,7 +46,7 @@ public class BomberScript : MonoBehaviour {
 					
 					bulDirection = new Vector3(-.4f,-.4f,0);
 					
-					print ("neg neg" + bulDirection);
+					//print ("neg neg" + bulDirection);
 					
 					Clone.GetComponent<EnemyBulletScript> ().targetPos = bulDirection;
 					
@@ -55,7 +55,7 @@ public class BomberScript : MonoBehaviour {
 			Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
 
 					bulDirection = new Vector3(.4f,.4f,0);
-					print ("pos pos" + bulDirection);
+					//print ("pos pos" + bulDirection);
 
 					Clone.GetComponent<EnemyBulletScript> ().targetPos = bulDirection;
 	
@@ -64,7 +64,7 @@ public class BomberScript : MonoBehaviour {
 			Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
 
 					bulDirection = new Vector3(-.4f,.4f,0);
-					print ("neg pos"+bulDirection);
+					//print ("neg pos"+bulDirection);
 
 					Clone.GetComponent<EnemyBulletScript> ().targetPos = bulDirection;
 
@@ -73,7 +73,7 @@ public class BomberScript : MonoBehaviour {
 			Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
 
 					bulDirection = new Vector3(.4f,-.4f,0);
-					print ("pos neg" + bulDirection);
+					//print ("pos neg" + bulDirection);
 
 					Clone.GetComponent<EnemyBulletScript> ().targetPos = bulDirection;
 

@@ -37,7 +37,7 @@ public class PlayerScript : MonoBehaviour {
 			healthKeeper = playerHealthObject.GetComponent <HealthKeeper> ();
 		}
 		if (healthKeeper == null) {
-			Debug.Log ("Can't find 'HealthKeeper' script");
+			//Debug.Log ("Can't find 'HealthKeeper' script");
 		}
 
 		spawnerScript = GetComponent<SpawnerScript> ();
@@ -163,7 +163,7 @@ public class PlayerScript : MonoBehaviour {
 	}
 	public void ChangeColor(){
 
-		print ("Changing color");
+		//print ("Changing color");
 
 			if (playerHealth == 5) {
 				gameObject.GetComponent<SpriteRenderer> ().color = new Color (0f, 1f, 0f, 1);

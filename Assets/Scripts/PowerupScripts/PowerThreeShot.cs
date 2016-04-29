@@ -9,7 +9,7 @@ public class PowerThreeShot : MonoBehaviour {
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerScript = player.GetComponent < PlayerScript > ();
-		print ("Yay I'm alive triple shot");
+		//print ("Yay I'm alive triple shot");
 		
 	}
 	
@@ -19,7 +19,7 @@ public class PowerThreeShot : MonoBehaviour {
 	}
 	
 	void OnCollisionEnter2D(Collision2D coll){
-		print ("collision activate tripleshot");
+		//print ("collision activate tripleshot");
 		if (coll.gameObject.tag == "Player") {		//when hit by player 
 			onHit ();
 		}
@@ -28,7 +28,7 @@ public class PowerThreeShot : MonoBehaviour {
 	//  what happens when hit
 	void onHit (){
 		playerScript.threeShotActivate ();
-		print ("3 shot");
+		//print ("3 shot");
 		playerScript.ChangeColor ();
 		Destroy (gameObject);
 	}

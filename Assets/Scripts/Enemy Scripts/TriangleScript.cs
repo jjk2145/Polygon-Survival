@@ -9,7 +9,7 @@ public class TriangleScript : MonoBehaviour {
 	Vector2 position;
 
 
-
+	public float hpMultiplyer = 1;
 	float enemyHealth = 3;
 
 	public GameObject bullet;
@@ -35,7 +35,7 @@ public class TriangleScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-
+		enemyHealth = enemyHealth * hpMultiplyer;
 
 		pathNum = Random.Range (1,9);
 		/*if (scoreKeeper.GetComponent<ScoreKeeper> ().score > 500) {
@@ -90,7 +90,7 @@ public class TriangleScript : MonoBehaviour {
 			scoreKeeper = scoreKeeperObject.GetComponent <ScoreKeeper> ();
 		}
 		if (scoreKeeper == null) {
-			Debug.Log ("Can't find 'ScoreKeeper' script");
+			//Debug.Log ("Can't find 'ScoreKeeper' script");
 		}
 
 		dropPowerupScript = gameManager.GetComponent <DropPowerup> ();
