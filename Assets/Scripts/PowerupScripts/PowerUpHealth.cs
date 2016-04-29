@@ -19,6 +19,7 @@ public class PowerUpHealth : MonoBehaviour {
 			//Debug.Log ("Can't find 'HealthKeeper' script");
 		}
 		//print ("Yay I'm alive hp boost");
+		Destroy(gameObject, 4f);
 	}
 	
 	// Update is called once per frame
@@ -34,9 +35,14 @@ public class PowerUpHealth : MonoBehaviour {
 	
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  what happens when hit
 	void onHit (){
-		playerScript.playerHealth++;
-		healthKeeper.AddOneHealth ();
-		playerScript.ChangeColor ();
-		Destroy (gameObject);
+		if (playerScript.playerHealth == 5) {
+			Destroy (gameObject);
+		} else {
+			playerScript.playerHealth++;
+			healthKeeper.AddOneHealth ();
+			playerScript.ChangeColor ();
+			Destroy (gameObject);
+		}
+
 	}
 }

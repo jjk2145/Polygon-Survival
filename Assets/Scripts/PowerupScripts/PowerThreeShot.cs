@@ -10,7 +10,7 @@ public class PowerThreeShot : MonoBehaviour {
 		player = GameObject.FindGameObjectWithTag("Player");
 		playerScript = player.GetComponent < PlayerScript > ();
 		//print ("Yay I'm alive triple shot");
-		
+		Destroy(gameObject, 4f);
 	}
 	
 	// Update is called once per frame

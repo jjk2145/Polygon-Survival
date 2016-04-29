@@ -52,20 +52,21 @@ public class DropPowerup : MonoBehaviour {
 
 			GameObject hpPowerup = (GameObject) Instantiate(HPUp,location,
 				Quaternion.identity);
+				//Destroy(gameObject, 5f);
 		}
 
 		else if (powerupNumber == 1) {
 			//spawn a triple shot
 			GameObject TripleShot = (GameObject) Instantiate(tripleShot,location,
 				Quaternion.identity);
-
+				//Destroy(gameObject, 5f);
 		}
 
 		else if (powerupNumber == 2) {
 			//spawn a rapid fire
 			GameObject RapidFire = (GameObject) Instantiate(rapidFire,location,
 				Quaternion.identity);
-
+				//Destroy(gameObject, 5f);
 		}
 	}
 }

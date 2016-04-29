@@ -9,10 +9,10 @@ public class PlayerScript : MonoBehaviour {
 	private HealthKeeper healthKeeper;
 	private SpawnerScript spawnerScript;
 	public GUIText youLoseText;
-	public bool powerThreeShot = true;
+	public bool powerThreeShot = false;
 
-	private float threeShotStartTime = -1000f;
-	private float threeShotDuration = 5f;
+	public float threeShotStartTime = -1000f;
+	public float threeShotDuration = 5f;
 
 	private float shotCD = .25f;
 	private float shotCDStartTime;
@@ -41,7 +41,7 @@ public class PlayerScript : MonoBehaviour {
 		}
 
 		spawnerScript = GetComponent<SpawnerScript> ();
-		PlayAgainButton ();
+		//PlayAgainButton ();
 
 	}
 
@@ -52,7 +52,6 @@ public class PlayerScript : MonoBehaviour {
 			if(Time.time>=threeShotDuration+threeShotStartTime)	{
 				powerThreeShot = false;
 				ChangeColor();
-
 			}
 		}
 		if (canIShoot == false) {
@@ -127,10 +126,11 @@ public class PlayerScript : MonoBehaviour {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  detect death of player
 		if (playerHealth <= 0) {
 			youLoseText.text = "YOU LOSE";
-			Destroy (gameObject);
+
 			print ("you lose");
 			//youLoseText.enabled = true;
 			PlayAgain.SetActive (true);
+			Destroy (gameObject);
 
 		}
 
@@ -192,10 +192,10 @@ public class PlayerScript : MonoBehaviour {
 		ChangeColor ();
 	}
 
-	void PlayAgainButton()
+	/*void PlayAgainButton()
 	{
 		PlayAgain.GetComponent<Button> ().onClick.AddListener (GameOverCommence);
-	}
+	}*/
 
 	public void LoadScene(int level)
 	{
@@ -212,8 +212,8 @@ public class PlayerScript : MonoBehaviour {
 
 	}
 
-	void GameOverCommence()
+	/*public void GameOverCommence()
 	{
 		spawnerScript.SpawnerReset ();
-	}
+	}*/
 }
