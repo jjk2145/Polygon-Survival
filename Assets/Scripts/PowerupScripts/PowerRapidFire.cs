@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PowerThreeShot : MonoBehaviour {
+public class PowerRapidFire : MonoBehaviour {
+
 	public GameObject player;
 	private PlayerScript playerScript;
 	
@@ -15,9 +16,9 @@ public class PowerThreeShot : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
 	
+	}
+
 	void OnCollisionEnter2D(Collision2D coll){
 		//print ("collision activate tripleshot");
 		if (coll.gameObject.tag == "Player") {		//when hit by player 
@@ -27,9 +28,7 @@ public class PowerThreeShot : MonoBehaviour {
 	
 	//  what happens when hit
 	void onHit (){
-		playerScript.threeShotActivate ();
-		//print ("3 shot");
-		//playerScript.ChangeColor ();
+		playerScript.rapidFireActivate ();
 		Destroy (gameObject);
 	}
 }

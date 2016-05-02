@@ -6,6 +6,7 @@ public class CoolDownTimeKeeper : MonoBehaviour {
 
 	public GUIText CooldownTimerText;
 	public Image ThreeShotSprite;
+	public Image RapidFireSprite;
 	public GameObject player;
 	private PlayerScript playerScript;
 	private float seconds;
@@ -22,12 +23,14 @@ public class CoolDownTimeKeeper : MonoBehaviour {
 			ThreeShotSprite.enabled = true;
 			CooldownTimerText.text = "Three Shot Time Remaining : " + seconds + " seconds";
 		}
-		/*if (playerScript.rapidFire == true) {
+		else if (playerScript.powerRapidFire == true) {
 			seconds = Mathf.Round ((playerScript.rapidFireDuration + playerScript.rapidFireStartTime - Time.time) + 0.5f);
+			RapidFireSprite.enabled = true;
 			CooldownTimerText.text = "Rapid Fire Time Remaining : " + seconds + " seconds";
-		} */
+		}
 		else {
 			ThreeShotSprite.enabled = false;
+			RapidFireSprite.enabled = false;
 			CooldownTimerText.text = "No Ability Active";
 		}
 	}

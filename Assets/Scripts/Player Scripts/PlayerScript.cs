@@ -14,6 +14,10 @@ public class PlayerScript : MonoBehaviour {
 	public float threeShotStartTime = -1000f;
 	public float threeShotDuration = 5f;
 
+	public bool powerRapidFire = false;
+	public float rapidFireStartTime = -1000f;
+	public float rapidFireDuration = 4f;
+
 	private float shotCD = .25f;
 	private float shotCDStartTime;
 	private bool canIShoot = true;
@@ -52,6 +56,16 @@ public class PlayerScript : MonoBehaviour {
 			if(Time.time>=threeShotDuration+threeShotStartTime)	{
 				powerThreeShot = false;
 				ChangeColor();
+			}
+		}
+		if (powerRapidFire) {
+			if(Time.time>=rapidFireDuration+rapidFireStartTime)	{
+				shotCD = .25f;
+				powerRapidFire = false;
+				ChangeColor();
+			}
+			else {
+				shotCD = .10f;
 			}
 		}
 		if (canIShoot == false) {
@@ -183,6 +197,9 @@ public class PlayerScript : MonoBehaviour {
 			if(powerThreeShot){
 				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1f, 0f, 1f, 1);
 			}
+		if(powerRapidFire){
+				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 0f, 1);
+			}
 	}
 
 	//////  what happens when hit
@@ -212,6 +229,11 @@ public class PlayerScript : MonoBehaviour {
 
 	}
 
+	public void rapidFireActivate (){
+		rapidFireStartTime = Time.time;
+		powerRapidFire = true;
+		ChangeColor ();
+	}
 	/*public void GameOverCommence()
 	{
 		spawnerScript.SpawnerReset ();
