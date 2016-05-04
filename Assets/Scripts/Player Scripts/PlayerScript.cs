@@ -180,25 +180,25 @@ public class PlayerScript : MonoBehaviour {
 		//print ("Changing color");
 
 			if (playerHealth == 5) {
-				gameObject.GetComponent<SpriteRenderer> ().color = new Color (0f, 1f, 0f, 1);
+			gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (0, 77, 191, 255);
 			}
 			if (playerHealth == 4) {
-				gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.21f, 0.9f, 0.21f, 1);
+			gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (48, 102, 204, 255);
 			}
 			if (playerHealth == 3) {
-				gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.45f, 0.86f, 0.45f, 1);
+			gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (95, 144, 216, 255);
 			}
 			if (playerHealth == 2) {
-				gameObject.GetComponent<SpriteRenderer> ().color = new Color (0.67f, 0.9f, 0.67f, 1);
+			gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (146, 178, 225, 255);
 			}
 			if (playerHealth == 1) {
-				gameObject.GetComponent<SpriteRenderer> ().color = new Color (1, 1, 1, 1);
+			gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (205, 218, 239, 255);
 			}
 			if(powerThreeShot){
-				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1f, 0f, 1f, 1);
+				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (59,191,140,255);
 			}
-		if(powerRapidFire){
-				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 0f, 1);
+			if(powerRapidFire){
+				this.gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (180,116,217,255);
 			}
 	}
 

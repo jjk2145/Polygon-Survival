@@ -112,11 +112,11 @@ public class BomberScript : MonoBehaviour {
 		enemyHealth--;
 
 		if (enemyHealth == 2) {
-			this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1, 0.5f, 0, 1);
+			this.gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (255, 126, 21, 255);
 		}
 
 		if (enemyHealth == 1) {
-			this.gameObject.GetComponent<SpriteRenderer> ().color = new Color (1f, 0.92f, 0.016f, 1);
+			this.gameObject.GetComponent<SpriteRenderer> ().color = new Color32 (255, 145, 63, 255);
 		}
 	}
 }
