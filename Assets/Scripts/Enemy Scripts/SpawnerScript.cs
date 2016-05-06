@@ -17,11 +17,15 @@ public class SpawnerScript : MonoBehaviour {
 	bool inbetweenRound = false;
 
 	//Objects to reference
+	public GameObject thePool;
+	thepool PoolScript;
 	public GameObject triangle;
 	public GameObject bomber;
 	public GameObject ScoreKeeper;
 	public GUIText roundText;
 	public GUIText prepareText;
+
+	turnoffAfter prepareTextTurnOff;
 
 	float HPmultiplyer = 1;
 
@@ -29,7 +33,12 @@ public class SpawnerScript : MonoBehaviour {
 	int score;
 	// Use this for initialization
 	void Start () {
+
 		spawnTimer = Time.time + spawnCooldown;
+
+		prepareTextTurnOff = prepareText.GetComponent<turnoffAfter> ();
+
+		PoolScript = thePool.GetComponent<thepool> ();
 		//prepareText = (GUIText)GameObject.Find("prepare text");
 	
 	}
@@ -41,53 +50,47 @@ public class SpawnerScript : MonoBehaviour {
 
 		if (score >= 500 && score<749 && round == 1) {
 			spawnCooldown = 1.50f;
-			round++;
-			roundText.text = "Round: " + round;
-			prepareText.enabled = true;
-			spawnTimer += roundTimeInterval;
+			InBetweenRound ();
 		}
 		if (score >= 750 && score<999 && round == 2) {
 			spawnCooldown = 1.25f;
-			round++;
-			spawnTimer += roundTimeInterval;
-			roundText.text = "Round: " + round;
-			prepareText.enabled = true;
+			InBetweenRound ();
 		}
 		if (score >= 1000 && score<1999 && round == 3) {
 			spawnCooldown = 1f;
-			round++;
-			spawnTimer += roundTimeInterval;
-			roundText.text = "Round: " + round;
-			prepareText.enabled = true;
+			InBetweenRound ();
 		}
 		if (score >= 2000 && score<2999 && round == 4) {
 			spawnCooldown = .75f;
-			round++;
-			spawnTimer += roundTimeInterval;
-			roundText.text = "Round: " + round;
-			prepareText.enabled = true;
+			InBetweenRound ();;
 		}
 		if (score >= 3000 && score<3999 && round == 5) {
-			round++;
-			spawnTimer += roundTimeInterval;
-			roundText.text = "Round: " + round;
-			prepareText.enabled = true;
+			InBetweenRound ();
 		}
 		if (score >= 4000 && round == 6) {
 			//spawnCooldown = .35f;
 			HPmultiplyer = 2f;
-			round++;
-			spawnTimer += roundTimeInterval;
-			roundText.text = "Round: " + round;
-			prepareText.enabled = true;
+			InBetweenRound ();
 		}
 		if (score >= 5000 && round == 7) {
 			//spawnCooldown = .35f;
 			HPmultiplyer = 3f;
-			round++;
-			spawnTimer += roundTimeInterval;
-			roundText.text = "Round: " + round;
-			prepareText.enabled = true;
+			InBetweenRound ();
+		}
+		if (score >= 6000 && round == 8) {
+			//spawnCooldown = .35f;
+			HPmultiplyer = 4f;
+			InBetweenRound ();
+		}
+		if (score >= 7000 && round == 9) {
+			//spawnCooldown = .35f;
+			HPmultiplyer = 5f;
+			InBetweenRound ();
+		}
+		if (score >= 8000 && round == 10) {
+			//spawnCooldown = .35f;
+			HPmultiplyer = 6f;
+			InBetweenRound ();
 		}
 
 
@@ -125,5 +128,14 @@ public class SpawnerScript : MonoBehaviour {
 		spawnNumber = 100;
 		spawnTimer = 2;
 		spawnCooldown = 2;
+	}
+
+	public void InBetweenRound ()
+	{
+		round++;
+		roundText.text = "Round: " + round;
+		prepareText.text = "Round complete \nprepare for next round...";
+		prepareTextTurnOff.timeTurnedOn = Time.time;
+		spawnTimer += roundTimeInterval;
 	}
 }
