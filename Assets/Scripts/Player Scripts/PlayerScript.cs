@@ -34,6 +34,8 @@ public class PlayerScript : MonoBehaviour {
 
 	public float speed = 10.0f;
 
+	public AudioClip sound;
+
 	void Start ()
 	{
 		GameObject playerHealthObject = GameObject.FindWithTag ("HealthKeeper");
@@ -107,7 +109,9 @@ public class PlayerScript : MonoBehaviour {
 					}
 					canIShoot = false;
 					shotCDStartTime = Time.time;
+					gameObject.GetComponent<AudioSource>().PlayOneShot (sound);
 				}
+
 			}
 
 		}

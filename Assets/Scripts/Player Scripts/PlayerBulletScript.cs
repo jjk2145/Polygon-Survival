@@ -33,6 +33,8 @@ public class PlayerBulletScript : MonoBehaviour {
 
 		//transform.Rotate (buldirection);
 		transform.position += buldirection * speed * Time.deltaTime;
+
+
 		/*if (transform.position.y > max.y) {
 		
 			Destroy (gameObject);
