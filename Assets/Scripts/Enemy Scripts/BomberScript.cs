@@ -2,11 +2,14 @@
 using System.Collections;
 
 public class BomberScript : MonoBehaviour {
+
+
 	public GameObject bullet;
 	Vector3 bulDirection = new Vector3(.4f,.4f,0);
 	bool canIShoot = true;
 
-
+	public GameObject thePool;
+	thepool PoolScript;
 
 	float TimeSpawned;
 	float shootTimer;
@@ -24,6 +27,8 @@ public class BomberScript : MonoBehaviour {
 	void Start () {
 		TimeSpawned = Time.time;
 		shootTimer = Time.time - 3f;
+		thePool = GameObject.Find("PoolManager");
+		PoolScript = thePool.GetComponent<thepool> ();
 
 		GameObject scoreKeeperObject = GameObject.FindWithTag ("ScoreKeeper");
 		if (scoreKeeperObject != null) {
@@ -42,7 +47,18 @@ public class BomberScript : MonoBehaviour {
 		
 		if (shootTimer + 4f < Time.time) {
 
-					GameObject Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
+			GameObject Clone = PoolScript.CheckForInactiveBomber();
+
+					if(Clone == null)
+					{
+						 Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
+						 PoolScript.enemyBulletList.Add(Clone);
+					}
+					else
+					{
+						Clone.transform.position = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0);
+						gameObject.SetActive(true);
+					}
 					
 					bulDirection = new Vector3(-.4f,-.4f,0);
 					
@@ -52,8 +68,18 @@ public class BomberScript : MonoBehaviour {
 					
 
 		
-			Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
-
+			Clone = PoolScript.CheckForInactiveBomber();
+					
+					if(Clone == null)
+					{
+						Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
+						PoolScript.enemyBulletList.Add(Clone);
+					}
+					else
+					{
+						Clone.transform.position = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0);
+						gameObject.SetActive(true);
+					}
 					bulDirection = new Vector3(.4f,.4f,0);
 					//print ("pos pos" + bulDirection);
 
@@ -61,7 +87,18 @@ public class BomberScript : MonoBehaviour {
 	
 
 		
-			Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
+			Clone = PoolScript.CheckForInactiveBomber();
+					
+					if(Clone == null)
+					{
+						Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
+						PoolScript.enemyBulletList.Add(Clone);
+					}
+					else
+					{
+						Clone.transform.position = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0);
+						gameObject.SetActive(true);
+					}
 
 					bulDirection = new Vector3(-.4f,.4f,0);
 					//print ("neg pos"+bulDirection);
@@ -70,7 +107,18 @@ public class BomberScript : MonoBehaviour {
 
 
 		
-			Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
+			Clone = PoolScript.CheckForInactiveBomber();
+					
+					if(Clone == null)
+					{
+						Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
+						PoolScript.enemyBulletList.Add(Clone);
+					}
+					else
+					{
+						Clone.transform.position = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0);
+						gameObject.SetActive(true);
+					}
 
 					bulDirection = new Vector3(.4f,-.4f,0);
 					//print ("pos neg" + bulDirection);
@@ -85,7 +133,7 @@ public class BomberScript : MonoBehaviour {
 		if (enemyHealth <= 0) { 
 			dropPowerupScript.location = transform.position;
 			dropPowerupScript.RNG ();
-			Destroy (gameObject);
+			gameObject.SetActive(false);
 		}
 
 	}

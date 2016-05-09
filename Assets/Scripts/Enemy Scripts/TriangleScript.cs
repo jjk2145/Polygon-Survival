@@ -8,6 +8,8 @@ public class TriangleScript : MonoBehaviour {
 	float rotationSpeed = 1.5f;
 	Vector2 position;
 
+	public GameObject thePool;
+	thepool PoolScript;
 
 	public float hpMultiplyer = 1;
 	float enemyHealth = 3;
@@ -34,6 +36,9 @@ public class TriangleScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		thePool = GameObject.Find("PoolManager");
+		PoolScript = thePool.GetComponent<thepool> ();
 
 		enemyHealth = enemyHealth * hpMultiplyer;
 
@@ -160,7 +165,17 @@ public class TriangleScript : MonoBehaviour {
 		//ENEMY SHOOTING
 		if (shootTimer + 2.25f < Time.time && canIShoot) {
 			for(int i = 0;i<3;i++){
-				GameObject Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
+				GameObject Clone = PoolScript.CheckForInactiveEnemyBullet();
+				if(Clone == null)
+				{
+					Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
+				}
+				else
+				{
+					Clone.transform.position = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0);
+					Clone.SetActive(true);
+				}
+				//GameObject Clone = (GameObject)Instantiate (bullet, new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0), Quaternion.identity);
 				if (i == 0) {
 					//bullet.transform.LookAt(corner1.transform);
 					bulDirection = (corner1.transform.position - transform.position).normalized;
@@ -197,11 +212,11 @@ public class TriangleScript : MonoBehaviour {
 		if (enemyHealth <= 0) { 
 			dropPowerupScript.location = transform.position;
 			dropPowerupScript.RNG ();
-			Destroy (gameObject);
+			gameObject.SetActive(false);
 		}
 
 		if (transform.position.y < -10f) {
-			Destroy (gameObject);
+			gameObject.SetActive(false);
 		}
 	}
 

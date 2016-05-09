@@ -104,19 +104,46 @@ public class SpawnerScript : MonoBehaviour {
 			if (spawnNumber >=25 ) {	//75% chance
 				//SPAWN TRIANGLE ENEMY
 				//GameObject triangle = new GameObject(Random.Range(-8,8),9);
-				Instantiate(triangle,
+				/*Instantiate(triangle,
 					new Vector3(Random.Range(-8,8),9,0),
 					Quaternion.identity);
-				triangle.GetComponent<TriangleScript> ().hpMultiplyer = HPmultiplyer;
+				triangle.GetComponent<TriangleScript> ().hpMultiplyer = HPmultiplyer;*/
+				GameObject triangleClone = PoolScript.CheckForInactiveTriangle();
+				if(triangleClone == null)
+				{
+					triangleClone = (GameObject)Instantiate(triangle,
+					            new Vector3(Random.Range(-8,8),9,0),
+					            Quaternion.identity);
+					triangleClone.GetComponent<TriangleScript> ().hpMultiplyer = HPmultiplyer;
+					PoolScript.triangleEnemyList.Add(triangleClone);
+				}
+				else{
+					triangleClone.SetActive(true);
+					triangleClone.transform.position = new Vector3(Random.Range(-8,8),9,0);
+					triangleClone.GetComponent<TriangleScript> ().hpMultiplyer = HPmultiplyer;
+
+				}
 				
 			}
 
 			if (spawnNumber <25) {		//25% chance
 				//SPAWN BOMBER ENEMY
 				//GameObject triangle = new GameObject(Random.Range(-8,8),9);
-				Instantiate(bomber,
-					new Vector3(Random.Range(-14,14),Random.Range(-7,7),0),
-					Quaternion.identity);
+
+				GameObject bomberClone = PoolScript.CheckForInactiveBomber();
+
+				if(bomberClone == null)
+				{
+					Instantiate(bomber,
+						new Vector3(Random.Range(-14,14),Random.Range(-7,7),0),
+						Quaternion.identity);
+
+					PoolScript.bomberEnemyList.Add(bomberClone);
+				}
+				else{
+					bomberClone.transform.position = new Vector3(Random.Range(-14,14),Random.Range(-7,7),0);
+					bomberClone.SetActive(true);
+				}
 
 			}
 

@@ -9,11 +9,11 @@ public class thepool : MonoBehaviour {
 	public GameObject triangleEnemyPrefab;
 	public GameObject bomberEnemyPrefab;
 
-	List<GameObject> enemyBulletList;
-	List<GameObject> playerBulletList;
+	public List<GameObject> enemyBulletList;
+	public List<GameObject> playerBulletList;
 
-	List<GameObject> triangleEnemyList;
-	List<GameObject> bomberEnemyList;
+	public List<GameObject> triangleEnemyList;
+	public List<GameObject> bomberEnemyList;
 
 	// Use this for initialization
 	void Start () {
@@ -60,10 +60,54 @@ public class thepool : MonoBehaviour {
 	
 	}
 
-	public void CheckForInactive()
+	public GameObject CheckForInactiveTriangle()
 	{
 		foreach (GameObject triangle in triangleEnemyList) {
+			if(triangle.activeSelf == true)
+			{
+				continue;
+			}
+				return triangle;
+		}
+		return null;
+	}
+
+	public GameObject CheckForInactiveBomber()
+	{
+		foreach (GameObject bomber in bomberEnemyList) {
+			if(bomber.activeSelf == true)
+			{
+				continue;
+			}
+				return bomber;
+		}
+		return null;
+	}
+
+	public GameObject CheckForInactivePlayerBullet()
+	{
+		foreach (GameObject bullet in playerBulletList) {
+			if(bullet.activeSelf == true)
+			{
+				continue;
+			}
+				return bullet;
 
 		}
+		return null;
 	}
+
+	public GameObject CheckForInactiveEnemyBullet()
+	{
+		foreach (GameObject bullet in enemyBulletList) {
+			if(bullet.activeSelf == true)
+			{
+				continue;
+			}
+				return bullet;
+
+		}
+		return null;
+	}
+
 }

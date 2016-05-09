@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour {
 
+	public GameObject thePool;
+	thepool PoolScript;
+
 	public GameObject PlayerBullet;
 	public GameObject BulletPosition;
 	private HealthKeeper healthKeeper;
@@ -38,6 +41,8 @@ public class PlayerScript : MonoBehaviour {
 
 	void Start ()
 	{
+		PoolScript = thePool.GetComponent<thepool> ();
+
 		GameObject playerHealthObject = GameObject.FindWithTag ("HealthKeeper");
 		if (playerHealthObject != null) {
 			healthKeeper = playerHealthObject.GetComponent <HealthKeeper> ();
@@ -82,7 +87,16 @@ public class PlayerScript : MonoBehaviour {
 			if(canIShoot)
 			{
 				if (powerThreeShot == false){
-					GameObject bul = (GameObject)Instantiate (PlayerBullet);
+
+					GameObject bul = PoolScript.CheckForInactivePlayerBullet();
+
+					if(bul == null)
+					{
+						bul = (GameObject)Instantiate (PlayerBullet);
+						PoolScript.playerBulletList.Add(bul);
+
+					}
+					//GameObject bul = (GameObject)Instantiate (PlayerBullet);
 					bul.transform.position = transform.position;
 
 					mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
@@ -101,7 +115,16 @@ public class PlayerScript : MonoBehaviour {
 					direction = Quaternion.Euler(0, 0, -spreadAngle) * direction;
 
 					for (int i = 0; i < 3; i++){
-						GameObject bul = (GameObject)Instantiate (PlayerBullet);
+
+						GameObject bul = PoolScript.CheckForInactivePlayerBullet();
+						
+						if(bul == null)
+						{
+							bul = (GameObject)Instantiate (PlayerBullet);
+							PoolScript.playerBulletList.Add(bul);
+							
+						}
+
 						bul.transform.position = transform.position;
 						Vector3 intendedDirection;
 						intendedDirection = Quaternion.Euler(0,0,direction.z + (i*spreadAngle)) * direction;
