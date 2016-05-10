@@ -118,9 +118,10 @@ public class SpawnerScript : MonoBehaviour {
 					PoolScript.triangleEnemyList.Add(triangleClone);
 				}
 				else{
-					triangleClone.SetActive(true);
-					triangleClone.transform.position = new Vector3(Random.Range(-8,8),9,0);
+					
+					//triangleClone.transform.position = new Vector3(Random.Range(-8,8),9,0);
 					triangleClone.GetComponent<TriangleScript> ().hpMultiplyer = HPmultiplyer;
+					triangleClone.SetActive(true);
 
 				}
 				

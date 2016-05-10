@@ -35,7 +35,9 @@ public class TriangleScript : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
+
+		enemyHealth = 3;
 
 		thePool = GameObject.Find("PoolManager");
 		PoolScript = thePool.GetComponent<thepool> ();
@@ -50,9 +52,7 @@ public class TriangleScript : MonoBehaviour {
 		//pathNum = 8;
 		TimeSpawned = Time.time;
 		shootTimer = Time.time;
-		//corner1 = Transform.FindChild ("top");
-		//corner2 = Transform.FindChild ("left");
-		//corner3 = Transform.FindChild ("right");
+
 		corner1 = transform.FindChild ("top");
 		corner2 = transform.FindChild ("left");
 		corner3 = transform.FindChild ("right");
@@ -118,7 +118,7 @@ public class TriangleScript : MonoBehaviour {
 			}
 			if(transform.position.x<=0f){
 				transform.position = new Vector2(transform.position.x-speed*Time.deltaTime*2,transform.position.y+speed*Time.deltaTime);
-				if(transform.position.x<-20){Destroy (gameObject);}
+				if(transform.position.x<-20){gameObject.SetActive(false);}
 			}
 
 		}
@@ -129,7 +129,7 @@ public class TriangleScript : MonoBehaviour {
 			}
 			if (transform.position.y <= 0) {
 				transform.position = new Vector2(transform.position.x-speed*Time.deltaTime,transform.position.y);
-				if(transform.position.x<-20){Destroy (gameObject);}
+				if(transform.position.x<-20){gameObject.SetActive(false);}
 			}
 		}
 		//bot left L to the right
@@ -139,7 +139,7 @@ public class TriangleScript : MonoBehaviour {
 			}
 			if (transform.position.y >= 0) {
 				transform.position = new Vector2(transform.position.x+speed*Time.deltaTime,transform.position.y);
-				if(transform.position.x>20){Destroy (gameObject);}
+				if(transform.position.x>20){gameObject.SetActive(false);}
 			}
 		}
 		//top left to botright
@@ -212,6 +212,7 @@ public class TriangleScript : MonoBehaviour {
 		if (enemyHealth <= 0) { 
 			dropPowerupScript.location = transform.position;
 			dropPowerupScript.RNG ();
+			enemyHealth = 3;
 			gameObject.SetActive(false);
 		}
 

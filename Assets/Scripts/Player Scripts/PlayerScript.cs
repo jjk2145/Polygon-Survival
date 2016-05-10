@@ -90,12 +90,15 @@ public class PlayerScript : MonoBehaviour {
 
 					GameObject bul = PoolScript.CheckForInactivePlayerBullet();
 
-					if(bul == null)
-					{
+					if (bul == null) {
 						bul = (GameObject)Instantiate (PlayerBullet);
-						PoolScript.playerBulletList.Add(bul);
+						PoolScript.playerBulletList.Add (bul);
 
+					} 
+					else {
+						bul.SetActive (true);
 					}
+
 					//GameObject bul = (GameObject)Instantiate (PlayerBullet);
 					bul.transform.position = transform.position;
 
@@ -118,11 +121,13 @@ public class PlayerScript : MonoBehaviour {
 
 						GameObject bul = PoolScript.CheckForInactivePlayerBullet();
 						
-						if(bul == null)
-						{
+						if (bul == null) {
 							bul = (GameObject)Instantiate (PlayerBullet);
-							PoolScript.playerBulletList.Add(bul);
+							PoolScript.playerBulletList.Add (bul);
 							
+						} 
+						else {
+							bul.SetActive (true);
 						}
 
 						bul.transform.position = transform.position;
@@ -168,7 +173,7 @@ public class PlayerScript : MonoBehaviour {
 		if (playerHealth <= 0) {
 			youLoseText.text = "YOU LOSE";
 
-			print ("you lose");
+			//print ("you lose");
 			//youLoseText.enabled = true;
 			PlayAgain.SetActive (true);
 			Destroy (gameObject);

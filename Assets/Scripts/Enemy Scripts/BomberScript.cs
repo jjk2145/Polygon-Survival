@@ -24,7 +24,10 @@ public class BomberScript : MonoBehaviour {
 
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
+
+		enemyHealth = 3;
+
 		TimeSpawned = Time.time;
 		shootTimer = Time.time - 3f;
 		thePool = GameObject.Find("PoolManager");
@@ -47,7 +50,7 @@ public class BomberScript : MonoBehaviour {
 		
 		if (shootTimer + 4f < Time.time) {
 
-			GameObject Clone = PoolScript.CheckForInactiveBomber();
+			GameObject Clone = PoolScript.CheckForInactiveEnemyBullet();
 
 					if(Clone == null)
 					{
@@ -57,7 +60,7 @@ public class BomberScript : MonoBehaviour {
 					else
 					{
 						Clone.transform.position = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0);
-						gameObject.SetActive(true);
+						Clone.SetActive(true);
 					}
 					
 					bulDirection = new Vector3(-.4f,-.4f,0);
@@ -68,7 +71,7 @@ public class BomberScript : MonoBehaviour {
 					
 
 		
-			Clone = PoolScript.CheckForInactiveBomber();
+			Clone = PoolScript.CheckForInactiveEnemyBullet();
 					
 					if(Clone == null)
 					{
@@ -78,7 +81,7 @@ public class BomberScript : MonoBehaviour {
 					else
 					{
 						Clone.transform.position = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0);
-						gameObject.SetActive(true);
+						Clone.SetActive(true);
 					}
 					bulDirection = new Vector3(.4f,.4f,0);
 					//print ("pos pos" + bulDirection);
@@ -87,7 +90,7 @@ public class BomberScript : MonoBehaviour {
 	
 
 		
-			Clone = PoolScript.CheckForInactiveBomber();
+			Clone = PoolScript.CheckForInactiveEnemyBullet();
 					
 					if(Clone == null)
 					{
@@ -97,7 +100,7 @@ public class BomberScript : MonoBehaviour {
 					else
 					{
 						Clone.transform.position = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0);
-						gameObject.SetActive(true);
+						Clone.SetActive(true);
 					}
 
 					bulDirection = new Vector3(-.4f,.4f,0);
@@ -107,7 +110,7 @@ public class BomberScript : MonoBehaviour {
 
 
 		
-			Clone = PoolScript.CheckForInactiveBomber();
+			Clone = PoolScript.CheckForInactiveEnemyBullet();
 					
 					if(Clone == null)
 					{
@@ -117,7 +120,7 @@ public class BomberScript : MonoBehaviour {
 					else
 					{
 						Clone.transform.position = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, 0);
-						gameObject.SetActive(true);
+						Clone.SetActive(true);
 					}
 
 					bulDirection = new Vector3(.4f,-.4f,0);
@@ -133,6 +136,7 @@ public class BomberScript : MonoBehaviour {
 		if (enemyHealth <= 0) { 
 			dropPowerupScript.location = transform.position;
 			dropPowerupScript.RNG ();
+			enemyHealth = 3;
 			gameObject.SetActive(false);
 		}
 
