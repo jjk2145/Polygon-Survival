@@ -4,6 +4,8 @@ using System.Collections;
 public class PowerThreeShot : MonoBehaviour {
 	public GameObject player;
 	private PlayerScript playerScript;
+
+	public AudioClip audioClip;
 	
 	// Use this for initialization
 	void Start () {
@@ -30,6 +32,7 @@ public class PowerThreeShot : MonoBehaviour {
 		playerScript.threeShotActivate ();
 		//print ("3 shot");
 		//playerScript.ChangeColor ();
+		gameObject.GetComponent<AudioSource>().PlayOneShot (audioClip);
 		Destroy (gameObject);
 	}
 }

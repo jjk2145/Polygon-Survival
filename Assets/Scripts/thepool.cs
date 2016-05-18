@@ -21,6 +21,7 @@ public class thepool : MonoBehaviour {
 	GameObject triangleEnemyClone;
 	GameObject bomberEnemyClone;
 
+
 	// Use this for initialization
 	void Awake () {
 		//print ("make the Lists");

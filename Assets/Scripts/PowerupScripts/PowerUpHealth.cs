@@ -7,6 +7,8 @@ public class PowerUpHealth : MonoBehaviour {
 	private PlayerScript playerScript;
 	private HealthKeeper healthKeeper;
 
+	public AudioClip audioClip;
+
 	// Use this for initialization
 	void Start () {
 		player = GameObject.FindGameObjectWithTag("Player");
@@ -29,6 +31,7 @@ public class PowerUpHealth : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll){
 		if (coll.gameObject.tag == "Player") {		//when hit by player
+			gameObject.GetComponent<AudioSource>().PlayOneShot (audioClip);
 			onHit ();
 		}
 	}
@@ -42,7 +45,9 @@ public class PowerUpHealth : MonoBehaviour {
 			healthKeeper.AddOneHealth ();
 			playerScript.ChangeColor ();
 			Destroy (gameObject);
+
 		}
 
 	}
+
 }

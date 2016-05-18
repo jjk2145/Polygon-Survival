@@ -22,6 +22,8 @@ public class BomberScript : MonoBehaviour {
 	public GameObject gameManager;
 	public DropPowerup dropPowerupScript;
 
+	public AudioClip audioClip;
+
 
 	// Use this for initialization
 	void OnEnable () {
@@ -147,10 +149,12 @@ public class BomberScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll){						// when hit by playerBullet
 		if (coll.gameObject.tag == "PlayerBullet") {
 			onHit ();
+			gameObject.GetComponent<AudioSource>().PlayOneShot (audioClip);
 		}
 		if (TimeSpawned + 2f < Time.time) {
 			if (coll.gameObject.tag == "Player") {
 				enemyHealth = 0;
+				gameObject.GetComponent<AudioSource>().PlayOneShot (audioClip);
 			}
 		}
 	}

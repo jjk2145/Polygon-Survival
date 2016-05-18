@@ -37,7 +37,7 @@ public class PlayerScript : MonoBehaviour {
 
 	public float speed = 10.0f;
 
-	public AudioClip sound;
+	public AudioClip[] audioClip;
 
 	void Start ()
 	{
@@ -108,6 +108,8 @@ public class PlayerScript : MonoBehaviour {
 					bul.GetComponent<PlayerBulletScript> ().buldirection = direction;
 					canIShoot = false;
 					shotCDStartTime = Time.time;
+					//gameObject.GetComponent<AudioSource>().PlayOneShot (sound);
+					PlaySound(0);
 				}
 
 				if (powerThreeShot == true){
@@ -137,7 +139,9 @@ public class PlayerScript : MonoBehaviour {
 					}
 					canIShoot = false;
 					shotCDStartTime = Time.time;
-					gameObject.GetComponent<AudioSource>().PlayOneShot (sound);
+					//gameObject.GetComponent<AudioSource>().PlayOneShot (sound);
+					PlaySound(1);
+
 				}
 
 			}
@@ -172,11 +176,12 @@ public class PlayerScript : MonoBehaviour {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  detect death of player
 		if (playerHealth <= 0) {
 			youLoseText.text = "YOU LOSE";
-
+			PlaySound(2);
 			//print ("you lose");
 			//youLoseText.enabled = true;
 			PlayAgain.SetActive (true);
 			Destroy (gameObject);
+
 
 		}
 
@@ -236,9 +241,11 @@ public class PlayerScript : MonoBehaviour {
 
 	//////  what happens when hit
 	void onHit (){
+		PlaySound(2);
 		playerHealth--;
 		healthKeeper.SubtractOneHealth ();
 		ChangeColor ();
+
 	}
 
 	/*void PlayAgainButton()
@@ -270,4 +277,11 @@ public class PlayerScript : MonoBehaviour {
 	{
 		spawnerScript.SpawnerReset ();
 	}*/
+
+	void PlaySound(int clip)
+	{
+		AudioSource audio = GetComponent<AudioSource>();
+		audio.clip = audioClip [clip];
+		audio.Play();
+	}
 }
