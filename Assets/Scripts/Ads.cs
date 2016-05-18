@@ -5,9 +5,9 @@ public class Ads : MonoBehaviour
 {
 	public void ShowAd()
 	{
-		if (Advertisement.IsReady())
+		/*if (Advertisement.IsReady())
 		{
 			Advertisement.Show();
-		}
+		}*/
 	}
 }
