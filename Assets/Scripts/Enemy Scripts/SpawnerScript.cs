@@ -28,6 +28,7 @@ public class SpawnerScript : MonoBehaviour {
 	turnoffAfter prepareTextTurnOff;
 
 	float HPmultiplyer = 1;
+	float speedMultiplyer = 1;
 
 	//score from scorekeeper
 	int score;
@@ -57,7 +58,8 @@ public class SpawnerScript : MonoBehaviour {
 			InBetweenRound ();
 		}
 		if (score >= 1000 && score<1999 && round == 3) {
-			spawnCooldown = 1f;
+			//spawnCooldown = 1f;
+			speedMultiplyer = 1;
 			InBetweenRound ();
 		}
 		if (score >= 2000 && score<2999 && round == 4) {
@@ -67,11 +69,13 @@ public class SpawnerScript : MonoBehaviour {
 		}
 		if (score >= 3000 && score<3999 && round == 5) {
 			HPmultiplyer = 3f;
+			speedMultiplyer =2;
 			InBetweenRound ();
 		}
 		if (score >= 4000 && round == 6) {
 			//spawnCooldown = .35f;
 			HPmultiplyer = 4f;
+			speedMultiplyer = 3;
 			InBetweenRound ();
 		}
 		if (score >= 5000 && round == 7) {
@@ -117,12 +121,14 @@ public class SpawnerScript : MonoBehaviour {
 					            new Vector3(Random.Range(-8,8),9,0),
 					            Quaternion.identity);
 					triangleClone.GetComponent<TriangleScript> ().hpMultiplyer = HPmultiplyer;
+					triangleClone.GetComponent<TriangleScript> ().speed += speedMultiplyer;
 					PoolScript.triangleEnemyList.Add(triangleClone);
 				}
 				else{
 					
 					//triangleClone.transform.position = new Vector3(Random.Range(-8,8),9,0);
 					triangleClone.GetComponent<TriangleScript> ().hpMultiplyer = HPmultiplyer;
+					triangleClone.GetComponent<TriangleScript> ().speed += speedMultiplyer;
 					triangleClone.SetActive(true);
 
 				}

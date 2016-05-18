@@ -4,7 +4,7 @@ using System.Collections;
 public class TriangleScript : MonoBehaviour {
 	int pathNum;
 	float currentPos;
-	float speed = 2f;
+	public float speed = 2f;
 	float rotationSpeed = 1.5f;
 	Vector2 position;
 
@@ -39,6 +39,7 @@ public class TriangleScript : MonoBehaviour {
 	// Use this for initialization
 	void OnEnable () {
 
+		speed = 2f;
 		enemyHealth = 3;
 
 		thePool = GameObject.Find("PoolManager");
@@ -60,19 +61,19 @@ public class TriangleScript : MonoBehaviour {
 		corner3 = transform.FindChild ("right");
 		if (pathNum == 1) {
 			
-			speed = 4f;
+			speed += 2f;
 		}
 		if (pathNum == 2) {
 			transform.position = new Vector2(12,7);
-			speed = 2f;
+			speed += 1f;
 		}
 		if (pathNum == 3) {
 			transform.position = new Vector2(10,7);
-			speed = 4f;
+			speed += 2f;
 		}
 		if (pathNum == 4) {
 			transform.position = new Vector2(-10,-10.5f);
-			speed = 4f;
+			speed += 2f;
 		}
 
 		//topleft to botright
