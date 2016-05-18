@@ -61,35 +61,37 @@ public class SpawnerScript : MonoBehaviour {
 			InBetweenRound ();
 		}
 		if (score >= 2000 && score<2999 && round == 4) {
-			spawnCooldown = .75f;
-			InBetweenRound ();;
+			spawnCooldown = 1f;
+			HPmultiplyer = 2f;
+			InBetweenRound ();
 		}
 		if (score >= 3000 && score<3999 && round == 5) {
+			HPmultiplyer = 3f;
 			InBetweenRound ();
 		}
 		if (score >= 4000 && round == 6) {
 			//spawnCooldown = .35f;
-			HPmultiplyer = 2f;
+			HPmultiplyer = 4f;
 			InBetweenRound ();
 		}
 		if (score >= 5000 && round == 7) {
 			//spawnCooldown = .35f;
-			HPmultiplyer = 3f;
+			HPmultiplyer = 5f;
 			InBetweenRound ();
 		}
 		if (score >= 6000 && round == 8) {
 			//spawnCooldown = .35f;
-			HPmultiplyer = 4f;
+			HPmultiplyer = 6f;
 			InBetweenRound ();
 		}
 		if (score >= 7000 && round == 9) {
 			//spawnCooldown = .35f;
-			HPmultiplyer = 5f;
+			HPmultiplyer = 7f;
 			InBetweenRound ();
 		}
 		if (score >= 8000 && round == 10) {
 			//spawnCooldown = .35f;
-			HPmultiplyer = 6f;
+			HPmultiplyer = 8f;
 			InBetweenRound ();
 		}
 
